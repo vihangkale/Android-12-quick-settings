@@ -29,6 +29,12 @@ import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalance
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import DoNotDisturbOnOutlinedIcon from '@mui/icons-material/DoNotDisturbOnOutlined';
 import CastOutlinedIcon from '@mui/icons-material/CastOutlined';
+import Button from '@mui/material/Button';
+import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import Modal from '@mui/material/Modal';
+import RestartAltRoundedIcon from '@mui/icons-material/RestartAltRounded';
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 
 //const wifi = require('node-wifi');
@@ -41,6 +47,7 @@ function App() {
   const drawerWidth = 240;
   const [darkTheme, setDarkTheme] = React.useState(false);
   let [brightness, setBrightness] = React.useState(100);
+  const [modalOpen, setModalOpen] = React.useState(false);
 
   const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -62,7 +69,7 @@ function App() {
 const PrettoSlider = withStyles({
   root: {
       //color: "#52af77",
-      height: 50
+      height: "10vh"
     },
     thumb: {
       height: 50,
@@ -84,7 +91,7 @@ const PrettoSlider = withStyles({
       border:"none"
     },
     rail: {
-      height: 50,
+      height: 10,
       //borderRadius: 24,
       //opacity: 1,
       backgroundColor: "#424242",
@@ -140,7 +147,8 @@ async function Wifi() {
 //   device.listPairedDevices(alert);
 //
 // }
-
+const handleModalOpen = () => setModalOpen(true);
+const handleModalClose = () => setModalOpen(false);
 
 
   return (
@@ -221,7 +229,7 @@ async function Wifi() {
          <CardActionArea>
           <CardContent sx={{ display:"flex", justifyContent: "space-evenly"}}>
            <FlashlightOnIcon fontSize="large"/>
-           <Typography variant="h6"     sx={{alignSelf: "center",fontSize:"0.9rem"}}>
+           <Typography variant="h6"  sx={{alignSelf: "center",fontSize:"0.9rem"}}>
              Flashlight
            </Typography>
          </CardContent>
@@ -242,7 +250,7 @@ async function Wifi() {
         </Grid>
 
         <Grid item lg={2} xs={6} sm={3} md={3}>
-         <Card sx={{backgroundColor:"#009688",borderRadius:5,color: !darkTheme ? "#fff":null}}>
+         <Card sx={{backgroundColor:"#1de9b6",borderRadius:5,color: !darkTheme ? "#fff":null}}>
           <CardActionArea>
           <CardContent sx={{ display:"flex", justifyContent: "space-evenly"}}>
            <RoomOutlinedIcon fontSize="large"/>
@@ -291,7 +299,7 @@ async function Wifi() {
         </Card>
         </Grid>
         <Grid item lg={2} xs={6} sm={3} md={3}>
-         <Card sx={{backgroundColor:"#f44336",borderRadius:5,color: !darkTheme ? "#fff":null}}>
+         <Card sx={{backgroundColor:"#ffb74d",borderRadius:5,color: !darkTheme ? "#fff":null}}>
           <CardActionArea>
           <CardContent sx={{ display:"flex", justifyContent: "space-evenly"}}>
            <NotificationsNoneOutlinedIcon fontSize="large"/>
@@ -303,7 +311,7 @@ async function Wifi() {
         </Card>
         </Grid>
         <Grid item lg={2} xs={6} sm={3} md={3}>
-         <Card sx={{backgroundColor:"#9c27b0",borderRadius:5,color: !darkTheme ? "#fff":null}}>
+         <Card sx={{backgroundColor:"#ce93d8",borderRadius:5,color: !darkTheme ? "#fff":null}}>
           <CardActionArea>
           <CardContent sx={{ display:"flex", justifyContent: "space-evenly"}}>
            <DoNotDisturbOnOutlinedIcon fontSize="large"/>
@@ -315,7 +323,7 @@ async function Wifi() {
         </Card>
         </Grid>
         <Grid item lg={2} xs={6} sm={3} md={3}>
-         <Card sx={{backgroundColor:"#e91e63",borderRadius:5,color: !darkTheme ? "#fff":null}}>
+         <Card sx={{backgroundColor:"#97c3ff",borderRadius:5,color: !darkTheme ? "#fff":null}}>
           <CardActionArea>
           <CardContent sx={{ display:"flex", justifyContent: "space-evenly"}}>
            <CastOutlinedIcon fontSize="large" />
@@ -326,7 +334,60 @@ async function Wifi() {
          </CardActionArea>
         </Card>
         </Grid>
+        <Grid item lg={4}>
+         <IconButton variant="contained" sx={{borderRadius:5,backgroundColor:"#424242",width:"100%",color: !darkTheme ? "#fff":null}} >
+            <ModeEditOutlineOutlinedIcon fullWidth/>
+         </IconButton>
        </Grid>
+       <Grid item lg={4}>
+        <IconButton onClick={handleModalOpen} variant="contained" sx={{borderRadius:5,backgroundColor:"#424242",width:"100%",color: !darkTheme ? "#fff":null}} fullWidth>
+          <PowerSettingsNewIcon/>
+        </IconButton>
+          <Modal
+          open={modalOpen}
+          onClose={handleModalClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+        <Box
+            sx={{
+              backgroundColor:"#181b1f",
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              p: 4,
+              width: 400,
+              height:400,
+              transform: 'translate(-50%, -50%)',
+              borderRadius:10
+            }}
+            >
+            <Grid container spacing={2} sx={{justifyContent:"center"}}>
+            <Grid item lg={6}>
+              <IconButton variant="contained" sx={{borderRadius:"50%",backgroundColor:"#2D3034",height: "30vh",width:"100%",padding: "20px",color:"#fff"}} >
+                <PowerSettingsNewIcon/>
+                </IconButton>
+            </Grid>
+            <Grid item lg={6}>
+              <IconButton variant="contained" sx={{borderRadius:"50%",backgroundColor:"#2D3034",height: "30vh",width:"100%",padding: "20px",color:"#fff"}} >
+                <RestartAltRoundedIcon/>
+                </IconButton>
+            </Grid>
+            <Grid item lg={6} >
+              <IconButton variant="contained" sx={{borderRadius:"50%",backgroundColor:"#2D3034",height: "30vh",width:"100%",padding: "20px",color:"#fff"}} >
+                <RestartAltRoundedIcon/>
+                </IconButton>
+            </Grid>
+          </Grid>
+       </Box>
+        </Modal>
+      </Grid>
+        <Grid item lg={4}>
+         <IconButton variant="contained" sx={{borderRadius:5,backgroundColor:"#424242",width:"100%",color: !darkTheme ? "#fff":null}} fullWidth>
+            <SettingsOutlinedIcon/>
+         </IconButton>
+       </Grid>
+      </Grid>
       </Container>
     </Box>
     </div>
