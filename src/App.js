@@ -21,11 +21,26 @@ import Brightness6Icon from '@mui/icons-material/Brightness6';
 import FlashlightOnIcon from '@mui/icons-material/FlashlightOn';
 import LinearProgress from '@mui/material/LinearProgress';
 import Slider from '@mui/material/Slider';
+import ScreenRotationIcon from '@mui/icons-material/ScreenRotation';
+import RoomOutlinedIcon from '@mui/icons-material/RoomOutlined';
+import AirplanemodeActiveOutlinedIcon from '@mui/icons-material/AirplanemodeActiveOutlined';
+import BatterySaverOutlinedIcon from '@mui/icons-material/BatterySaverOutlined';
+import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import DoNotDisturbOnOutlinedIcon from '@mui/icons-material/DoNotDisturbOnOutlined';
+import CastOutlinedIcon from '@mui/icons-material/CastOutlined';
 import { withStyles, makeStyles } from "@material-ui/core/styles";
+
+//const wifi = require('node-wifi');
+// var wifi = require('wifi.js');
+// const brightness = require('brightness');
+let bright= "";
 
 
 function App() {
   const drawerWidth = 240;
+  const [darkTheme, setDarkTheme] = React.useState(false);
+  let [brightness, setBrightness] = React.useState(100);
 
   const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -54,12 +69,13 @@ const PrettoSlider = withStyles({
       width: 50,
       backgroundColor:"#b2ff59",
       content: '',
-      background:"url('https://img.icons8.com/material/48/000000/summer.png')",
+      background:" url('https://img.icons8.com/material/48/000000/summer.png')",
       backgroundSize:"30px 30px",
       backgroundRepeat: "no-repeat",
       backgroundPosition: "center",
       border:"none"
-        },
+
+            },
     active: {},
     track: {
       height: 50,
@@ -78,9 +94,57 @@ const PrettoSlider = withStyles({
     }
 })(Slider);
 
+function OnChange() {
+  setDarkTheme(!darkTheme);
+}
+
+function Brightness(event,newValue) {
+  console.log(newValue)
+    setBrightness(newValue)
+   bright = "brightness(" + brightness + "%)";
+}
+
+async function Wifi() {
+  //  setBrightness(brightness+10)
+  // bright = "brightness(" + brightness + "%)";
+//   var changeBrightness = require("node-brightness");
+// changeBrightness(50);
+//   await wifi.init({
+//   iface: null // network interface, choose a random wifi interface if set to null
+// });
+//
+//   await wifi.disconnect(error => {
+//     if (error) {
+//       console.log(error);
+//     } else {
+//       console.log('Disconnected');
+//       alert("Disconnected")
+//     }
+//   });
+
+// var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+// var type = connection.effectiveType;
+//
+// function updateConnectionStatus() {
+//   console.log("Connection type changed from " + type + " to " + connection.effectiveType);
+//   type = connection.effectiveType;
+// }
+//
+// connection.addEventListener('change', updateConnectionStatus);
+
+}
+
+// function Bluetooth() {
+//   const device = new bluetooth.DeviceINQ();
+//   device.listPairedDevices(console.log);
+//   device.listPairedDevices(alert);
+//
+// }
+
+
 
   return (
-    <div className="App">
+    <div className="App" style={{backgroundColor: darkTheme ? "#000":null,filter: bright}}>
       <AppBar position="fixed" >
        <Toolbar>
          <IconButton
@@ -99,59 +163,164 @@ const PrettoSlider = withStyles({
       </AppBar>
      <Toolbar/>
      <Box
-     height="100vh"
+     minHeight="100vh"
      overflowY="auto"
      >
       <Container maxWidth="lg" sx={{mt:4, mb:4}}>
        <Grid container spacing={2}>
-       <Grid item lg={12}>
+       <Grid item lg={12} xs={12} sm={12}>
          <Box sx={{ width: '100%' }}>
-          <PrettoSlider       defaultValue={80}/>
+          <PrettoSlider
+            value={brightness}
+            //step={10}
+            max ={100}
+            min ={0}
+            onChange={Brightness}/>
          </Box>
         </Grid>
-        <Grid item lg={2}>
-          <Card sx={{backgroundColor:"#B00020",borderRadius:5}}>
-           <CardActionArea>
+        <Grid item lg={2} xs={6} sm={3} md={3}>
+          <Card sx={{backgroundColor:"#B00020",borderRadius:5,color: !darkTheme ? "#fff":null}}>
+           <CardActionArea onClick={Wifi}>
             <CardContent sx={{ display:"flex", justifyContent: "space-evenly"}}>
               <SignalWifi4BarIcon fontSize="large"/>
-              <Typography variant="h6"     sx={{alignSelf: "center"}}>
+              <Typography variant="h6"   sx={{alignSelf: "center",fontSize:"0.9rem"}}>
                 Wifi
               </Typography>
             </CardContent>
            </CardActionArea>
           </Card>
         </Grid>
-        <Grid item lg={2}>
-        <Card sx={{backgroundColor:"#03DAC5",borderRadius:5}}>
-         <CardActionArea>
+        <Grid item lg={2} xs={6} sm={3} md={3}>
+        <Card sx={{backgroundColor:"#03DAC5",borderRadius:5,color: !darkTheme ? "#fff":null}}>
+         <CardActionArea
+         //onClick={Bluetooth}
+         >
          <CardContent sx={{ display:"flex", justifyContent: "space-evenly"}}>
            <BluetoothIcon fontSize="large"/>
-           <Typography variant="h6"     sx={{alignSelf: "center"}}>
+           <Typography variant="h6" sx={{alignSelf: "center",fontSize:"0.9rem"}}>
              Bluetooth
            </Typography>
          </CardContent>
          </CardActionArea>
         </Card>
         </Grid>
-        <Grid item lg={2}>
-        <Card sx={{backgroundColor:"#ff80ab",borderRadius:5}}>
-         <CardActionArea>
+        <Grid item lg={2} xs={6} sm={3} md={3}>
+        <Card sx={{backgroundColor:"#ff80ab",borderRadius:5,color: !darkTheme ? "#fff":null}}>
+         <CardActionArea onClick={OnChange}>
          <CardContent sx={{ display:"flex", justifyContent: "space-evenly"}}>
            <Brightness6Icon fontSize="large"/>
-           <Typography variant="h6" sx={{alignSelf: "center"}}>
+           <Typography variant="h6" sx={{alignSelf: "center",fontSize:"0.9rem"}}>
              Dark Theme
            </Typography>
          </CardContent>
          </CardActionArea>
         </Card>
         </Grid>
-        <Grid item lg={2}>
-        <Card sx={{backgroundColor:"#ffc107",borderRadius:5}}>
+        <Grid item lg={2} xs={6} sm={3} md={3}>
+        <Card sx={{backgroundColor:"#ffc107",borderRadius:5,color: !darkTheme ? "#fff":null}}>
+         <CardActionArea>
+          <CardContent sx={{ display:"flex", justifyContent: "space-evenly"}}>
+           <FlashlightOnIcon fontSize="large"/>
+           <Typography variant="h6"     sx={{alignSelf: "center",fontSize:"0.9rem"}}>
+             Flashlight
+           </Typography>
+         </CardContent>
+         </CardActionArea>
+        </Card>
+        </Grid>
+        <Grid item lg={2} xs={6} sm={3} md={3}>
+        <Card sx={{backgroundColor:"#607d8b",borderRadius:5,color: !darkTheme ? "#fff":null}}>
          <CardActionArea>
          <CardContent sx={{ display:"flex", justifyContent: "space-evenly"}}>
-           <FlashlightOnIcon fontSize="large"/>
-           <Typography variant="h6"     sx={{alignSelf: "center"}}>
-             Flashlight
+           <ScreenRotationIcon fontSize="large"/>
+           <Typography variant="h6"     sx={{alignSelf: "center",fontSize:"0.9rem"}}>
+             Auto Rotate
+           </Typography>
+         </CardContent>
+         </CardActionArea>
+        </Card>
+        </Grid>
+
+        <Grid item lg={2} xs={6} sm={3} md={3}>
+         <Card sx={{backgroundColor:"#009688",borderRadius:5,color: !darkTheme ? "#fff":null}}>
+          <CardActionArea>
+          <CardContent sx={{ display:"flex", justifyContent: "space-evenly"}}>
+           <RoomOutlinedIcon fontSize="large"/>
+           <Typography variant="h6"     sx={{alignSelf: "center",fontSize:"0.9rem"}}>
+             Location
+           </Typography>
+         </CardContent>
+         </CardActionArea>
+        </Card>
+        </Grid>
+
+        <Grid item lg={2} xs={6} sm={3} md={3}>
+         <Card sx={{backgroundColor:"#ff5722",borderRadius:5,color: !darkTheme ? "#fff":null}}>
+          <CardActionArea>
+          <CardContent sx={{ display:"flex", justifyContent: "space-evenly"}}>
+           <BatterySaverOutlinedIcon fontSize="large"/>
+           <Typography variant="h6"     sx={{alignSelf: "center",fontSize:"0.9rem"}}>
+             Baterry Saver
+           </Typography>
+         </CardContent>
+         </CardActionArea>
+        </Card>
+        </Grid>
+        <Grid item lg={2} xs={6} sm={3} md={3}>
+         <Card sx={{backgroundColor:"#00e676",borderRadius:5,color: !darkTheme ? "#fff":null}}>
+          <CardActionArea>
+          <CardContent sx={{ display:"flex", justifyContent: "space-evenly"}}>
+           <AccountBalanceWalletOutlinedIcon fontSize="large"/>
+           <Typography variant="h6"     sx={{alignSelf: "center",fontSize:"0.9rem"}}>
+             Wallet
+           </Typography>
+         </CardContent>
+         </CardActionArea>
+        </Card>
+        </Grid>
+        <Grid item lg={2} xs={6} sm={3} md={3}>
+         <Card sx={{backgroundColor:"#3f51b5",borderRadius:5,color: !darkTheme ? "#fff":null}}>
+          <CardActionArea>
+          <CardContent sx={{ display:"flex", justifyContent: "space-evenly"}}>
+           <AirplanemodeActiveOutlinedIcon fontSize="large"/>
+           <Typography variant="h6"     sx={{alignSelf: "center",fontSize:"0.9rem"}}>
+             Aeroplane Mode
+           </Typography>
+         </CardContent>
+         </CardActionArea>
+        </Card>
+        </Grid>
+        <Grid item lg={2} xs={6} sm={3} md={3}>
+         <Card sx={{backgroundColor:"#f44336",borderRadius:5,color: !darkTheme ? "#fff":null}}>
+          <CardActionArea>
+          <CardContent sx={{ display:"flex", justifyContent: "space-evenly"}}>
+           <NotificationsNoneOutlinedIcon fontSize="large"/>
+           <Typography variant="h6"     sx={{alignSelf: "center",fontSize:"0.9rem"}}>
+             Sound
+           </Typography>
+         </CardContent>
+         </CardActionArea>
+        </Card>
+        </Grid>
+        <Grid item lg={2} xs={6} sm={3} md={3}>
+         <Card sx={{backgroundColor:"#9c27b0",borderRadius:5,color: !darkTheme ? "#fff":null}}>
+          <CardActionArea>
+          <CardContent sx={{ display:"flex", justifyContent: "space-evenly"}}>
+           <DoNotDisturbOnOutlinedIcon fontSize="large"/>
+           <Typography variant="h6"     sx={{alignSelf: "center",fontSize:"0.9rem"}}>
+             Do Not Disturb
+           </Typography>
+         </CardContent>
+         </CardActionArea>
+        </Card>
+        </Grid>
+        <Grid item lg={2} xs={6} sm={3} md={3}>
+         <Card sx={{backgroundColor:"#e91e63",borderRadius:5,color: !darkTheme ? "#fff":null}}>
+          <CardActionArea>
+          <CardContent sx={{ display:"flex", justifyContent: "space-evenly"}}>
+           <CastOutlinedIcon fontSize="large" />
+           <Typography variant="h6"     sx={{alignSelf: "center",fontSize:"0.9rem"}}>
+             Screen Cast
            </Typography>
          </CardContent>
          </CardActionArea>
