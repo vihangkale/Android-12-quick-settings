@@ -334,12 +334,12 @@ const handleModalClose = () => setModalOpen(false);
          </CardActionArea>
         </Card>
         </Grid>
-        <Grid item lg={4}>
+        <Grid item lg={4} md={4} sm={4} xs={4}>
          <IconButton variant="contained" sx={{borderRadius:5,backgroundColor:"#424242",width:"100%",color: !darkTheme ? "#fff":null}} >
             <ModeEditOutlineOutlinedIcon fullWidth/>
          </IconButton>
        </Grid>
-       <Grid item lg={4}>
+       <Grid item lg={4} md={4} sm={4} xs={4}>
         <IconButton onClick={handleModalOpen} variant="contained" sx={{borderRadius:5,backgroundColor:"#424242",width:"100%",color: !darkTheme ? "#fff":null}} fullWidth>
           <PowerSettingsNewIcon/>
         </IconButton>
@@ -363,17 +363,17 @@ const handleModalClose = () => setModalOpen(false);
             }}
             >
             <Grid container spacing={2} sx={{justifyContent:"center"}}>
-            <Grid item lg={6}>
+            <Grid item lg={6} md={6} sm={6} xs={6} >
               <IconButton variant="contained" sx={{borderRadius:"50%",backgroundColor:"#2D3034",height: "30vh",width:"100%",padding: "20px",color:"#fff"}} >
                 <PowerSettingsNewIcon/>
                 </IconButton>
             </Grid>
-            <Grid item lg={6}>
+            <Grid item lg={6} md={6} sm={6} xs={6} >
               <IconButton variant="contained" sx={{borderRadius:"50%",backgroundColor:"#2D3034",height: "30vh",width:"100%",padding: "20px",color:"#fff"}} >
                 <RestartAltRoundedIcon/>
                 </IconButton>
             </Grid>
-            <Grid item lg={6} >
+            <Grid item lg={6} md={6} sm={6} xs={6}  >
               <IconButton variant="contained" sx={{borderRadius:"50%",backgroundColor:"#2D3034",height: "30vh",width:"100%",padding: "20px",color:"#fff"}} >
                 <RestartAltRoundedIcon/>
                 </IconButton>
@@ -382,7 +382,7 @@ const handleModalClose = () => setModalOpen(false);
        </Box>
         </Modal>
       </Grid>
-        <Grid item lg={4}>
+        <Grid item lg={4} md={4} sm={4} xs={4}>
          <IconButton variant="contained" sx={{borderRadius:5,backgroundColor:"#424242",width:"100%",color: !darkTheme ? "#fff":null}} fullWidth>
             <SettingsOutlinedIcon/>
          </IconButton>
