@@ -37,11 +37,7 @@ import Modal from '@mui/material/Modal';
 import RestartAltRoundedIcon from '@mui/icons-material/RestartAltRounded';
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 
-//const wifi = require('node-wifi');
-// var wifi = require('wifi.js');
-// const brightness = require('brightness');
 let bright= "";
-
 
 function App() {
   const drawerWidth = 240;
@@ -111,40 +107,11 @@ function Brightness(event,newValue) {
    bright = "brightness(" + brightness + "%)";
 }
 
-async function Wifi() {
-  //  setBrightness(brightness+10)
-  // bright = "brightness(" + brightness + "%)";
-//   var changeBrightness = require("node-brightness");
-// changeBrightness(50);
-//   await wifi.init({
-//   iface: null // network interface, choose a random wifi interface if set to null
-// });
+//  function Wifi() {
 //
-//   await wifi.disconnect(error => {
-//     if (error) {
-//       console.log(error);
-//     } else {
-//       console.log('Disconnected');
-//       alert("Disconnected")
-//     }
-//   });
-
-// var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-// var type = connection.effectiveType;
-//
-// function updateConnectionStatus() {
-//   console.log("Connection type changed from " + type + " to " + connection.effectiveType);
-//   type = connection.effectiveType;
 // }
 //
-// connection.addEventListener('change', updateConnectionStatus);
-
-}
-
 // function Bluetooth() {
-//   const device = new bluetooth.DeviceINQ();
-//   device.listPairedDevices(console.log);
-//   device.listPairedDevices(alert);
 //
 // }
 const handleModalOpen = () => setModalOpen(true);
@@ -188,7 +155,9 @@ const handleModalClose = () => setModalOpen(false);
         </Grid>
         <Grid item lg={2} xs={6} sm={3} md={3}>
           <Card sx={{backgroundColor:"#B00020",borderRadius:5,color: !darkTheme ? "#fff":null}}>
-           <CardActionArea onClick={Wifi}>
+           <CardActionArea
+            //onClick={Wifi}
+            >
             <CardContent sx={{ display:"flex", justifyContent: "space-evenly"}}>
               <SignalWifi4BarIcon fontSize="large"/>
               <Typography variant="h6"   sx={{alignSelf: "center",fontSize:"0.9rem"}}>
@@ -335,12 +304,12 @@ const handleModalClose = () => setModalOpen(false);
         </Card>
         </Grid>
         <Grid item lg={4} md={4} sm={4} xs={4}>
-         <IconButton variant="contained" sx={{borderRadius:5,backgroundColor:"#424242",width:"100%",color: !darkTheme ? "#fff":null}} >
-            <ModeEditOutlineOutlinedIcon fullWidth/>
+         <IconButton variant="contained" sx={{borderRadius:5,backgroundColor:"#424242",width:"100%",color:"#fff"}} >
+            <ModeEditOutlineOutlinedIcon />
          </IconButton>
        </Grid>
        <Grid item lg={4} md={4} sm={4} xs={4}>
-        <IconButton onClick={handleModalOpen} variant="contained" sx={{borderRadius:5,backgroundColor:"#424242",width:"100%",color: !darkTheme ? "#fff":null}} fullWidth>
+        <IconButton onClick={handleModalOpen} variant="contained" sx={{borderRadius:5,backgroundColor:"#424242",width:"100%",color:"#fff"}} >
           <PowerSettingsNewIcon/>
         </IconButton>
           <Modal
@@ -383,7 +352,7 @@ const handleModalClose = () => setModalOpen(false);
         </Modal>
       </Grid>
         <Grid item lg={4} md={4} sm={4} xs={4}>
-         <IconButton variant="contained" sx={{borderRadius:5,backgroundColor:"#424242",width:"100%",color: !darkTheme ? "#fff":null}} fullWidth>
+         <IconButton variant="contained" sx={{borderRadius:5,backgroundColor:"#424242",width:"100%", color:"#fff"}} >
             <SettingsOutlinedIcon/>
          </IconButton>
        </Grid>
